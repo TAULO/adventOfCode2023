@@ -1,6 +1,8 @@
 import readString from "../../readString.js"
 
-const NUM_WORDS = {
+const data = await readString('./data.txt')
+
+const wordsMapper = {
 	one: 1,
 	two: 2,
 	three: 3,
@@ -13,10 +15,7 @@ const NUM_WORDS = {
 };
 
 async function solved() {
-    const input = await readString('./data.txt')
-
-    const test = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"]
-    const NUM_WORD_ENTRIES = Object.entries(NUM_WORDS);
+    const NUM_WORD_ENTRIES = Object.entries(wordsMapper);
     
     function strToNum(str) {
         for (let [word, num] of NUM_WORD_ENTRIES) {
@@ -29,7 +28,7 @@ async function solved() {
         return '';
     }
     
-    const numbersInLines = test.map((line) => {
+    const numbersInLines = data.map((line) => {
         const allNumbers = line
             .split('')
             .map((char, i) => {
@@ -37,7 +36,7 @@ async function solved() {
                 
                 return /\d/.test(char) ? char : strToNum(restOfLineFromChar);
             })
-            .filter((char) => char);
+            .filter((char) => char)
     
         const firstNumber = allNumbers[0];
         const lastNumber = allNumbers[allNumbers.length - 1];
@@ -45,7 +44,6 @@ async function solved() {
     });
     
     let sum = 0;
-    console.log(numbersInLines)
     for (let num of numbersInLines) {
         sum += num;
     }

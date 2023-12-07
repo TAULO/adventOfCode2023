@@ -28,7 +28,7 @@ function solved2() {
     let sum = 0
     data.map(d => [...d]
         .filter(d => parseInt(d)))
-        .map(d => sum+= parseInt(d[0] + d[d.length -1]))
+        .forEach(d => sum+= parseInt(d[0] + d[d.length -1]))
 
     return sum
 }
